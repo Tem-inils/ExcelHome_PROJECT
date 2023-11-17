@@ -1,7 +1,27 @@
 import sqlite3
 
-connection = sqlite3.connect('test_db.db')
+db = sqlite3.connect('your_database.db')
 
-sql = connection.cursor()
+sql = db.cursor()
 
-sql.execute('CREATE TABLE IF NOT EXISTS info_xls (cmp_name TEXT, prov_name TEXT, city_name TEXT) ')
+sql.execute(
+    'CREATE TABLE IF NOT EXISTS info_xls (id INTEGER PRIMARY KEY AUTOINCREMENT, Company_Name TEXT, Province TEXT, City TEXT, Contact_Person TEXT, Mr_Ms TEXT, Mobile_Phone TEXT, Tel TEXT, Fax TEXT, Address TEXT, Post_Code TEXT, Website TEXT, Introduction TEXT, Main_Products TEXT, Company_NameCHINE TEXT);')
+
+db.close()
+
+
+def add_company(cpm_name, province, city, contact_person, mr_ms, mobile_phone, tel, fax, address, post_code, website,
+                introduction, main_products, company_name_chine):
+
+    db = sqlite3.connect('your_database.db')
+
+    sql = db.cursor()
+
+    sql.execute(
+        'INSERT INTO info_xls (Company_Name, Province, City, Contact_Person, Mr_Ms, Mobile_Phone, Tel, Fax, Address, Post_Code, Website, Introduction, Main_Products, Company_NameCHINE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
+        (cpm_name, province, city, contact_person, mr_ms, mobile_phone, tel, fax, address, post_code, website,
+         introduction, main_products, company_name_chine))
+
+    db.commit()
+
+
