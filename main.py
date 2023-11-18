@@ -1,34 +1,59 @@
-# import sqlite3
-# import xlrd
+import os
+import xlrd
+import database as db
+import logging
+
+logging.basicConfig(filename='error_log.txt', level=logging.ERROR)
+
+folder_path = r'D:\google table'
+
+items = os.listdir(folder_path)
+
+for item in items:
+    package = f'{folder_path}/{item}'
+    for i in package:
+        file_path = f'{package}/{i}'
+        print(file_path)
+        # or use f-string (note the 'r' prefix for the raw string)
+        # file_path = rf'D:\google table\2023 Electrics & Electronics\{item}'
+        # Now you can use file_path as the full path to each item
+    # # Открываем таблицы -->
+    #     try:
+    #         # Open the workbook
+    #         book = xlrd.open_workbook(file_path)
+    #
+    #         # Get the first sheet
+    #         sh = book.sheet_by_index(0)
+    #
+    #         for i in range(1, sh.nrows):
+    #             info = sh.row(i)
+    #             print(info)
+    #
+    #             for j in range(len(info)):
+    #                 info[j] = str(info[j].value).replace('text:', '').strip()
+    #                 print(info)
+    #
+    #             try:
+    #                 db.add_company(*info)
+    #             except Exception as e:
+    #                 # Log the exception to the file
+    #                 logging.error(f"Error processing file '{file_path}': {e}")
+    #     except Exception as e:
+    #         # Log the exception to the file
+    #         logging.error(f"Error opening file '{file_path}': {e}")
+    #
+
+
+
+
+
+# Сколько страниц в xls таблицие -->
+# print(f"Страниц в xls таблице - {book.nsheets}")t
+# Имя страниц таблицы -->
+# print(f"Worksheet name(s): {book.sheet_names()}")
+# Вывод Имени страницы Кол-во Строк Кол-во Колонок -->
+# print(f"Info - {book.sheet_by_index(0).name}\nСтроки - {sh.nrows}\nКолонки - {sh.ncols}")
 #
-# # Открываем файл Excel (.xls)
-# workbook = xlrd.open_workbook('Batteries.xls')
-#
-# # Выбираем активный лист
-# sheet = workbook.sheet_by_index(0)
-#
-# # Подключение к базе данных (в примере используется SQLite)
-# conn = sqlite3.connect('your_database.db')
-# cursor = conn.cursor()
-#
-# # Создание таблицы в базе данных (если необходимо)
-# cursor.execute('''CREATE TABLE IF NOT EXISTS your_table
-#                 (column1 TEXT, column2 TEXT, column3 INTEGER)''')
-#
-# # Запись данных в базу данных
-# for row_num in range(1, sheet.nrows):  # Предполагается, что заголовки находятся в первой строке
-#     row = sheet.row_values(row_num)
-#
-#     # Check the length of the row
-#     if len(row) != 3:
-#         print("Unexpected number of values in row {}: {}".format(row_num, len(row)))
-#         continue  # Skip this row or handle it differently if needed
-#
-#     # Unpack values if the row has the expected number of values
-#     column1, column2, column3 = row
-#     cursor.execute("INSERT INTO your_table VALUES (?, ?, ?)", (column1, column2, column3))
-#
-# # Сохранение изменений и закрытие соединения
-# conn.commit()
-# conn.close()
-#
+# print("Cell D30 is {0}".format(sh.cell_value(rowx=29, colx=3)))
+# for rx in range(sh.nrows):
+#     print(sh.row(rx))

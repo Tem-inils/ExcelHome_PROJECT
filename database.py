@@ -1,6 +1,6 @@
 import sqlite3
 
-db = sqlite3.connect('your_database.db')
+db = sqlite3.connect('test.db')
 
 sql = db.cursor()
 
@@ -10,8 +10,8 @@ sql.execute(
 db.close()
 
 
-def add_company(cpm_name, province, city, contact_person, mr_ms, mobile_phone, tel, fax, address, post_code, website,
-                introduction, main_products, company_name_chine):
+def add_company(cpm_name=None, province=None, city=None, contact_person=None, mr_ms=None, mobile_phone=None, tel=None, fax=None, address=None, post_code=None, website=None,
+                introduction=None, main_products=None, company_name_chine=None):
 
     db = sqlite3.connect('your_database.db')
 
